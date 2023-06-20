@@ -1,24 +1,31 @@
-import type { Component } from 'solid-js';
-
-import logo from './logo.svg';
-import styles from './App.module.css';
+import type { Component } from "solid-js";
+import styles from "./App.module.css";
+import { createSignal } from "solid-js";
 
 const App: Component = () => {
+  const [keyword, setKeyword] = createSignal("");
+
+  const handleKeywordChange = (e) => {
+    setKeyword(e.target.value);
+  };
+
+  const submitKeyword = () => {
+    console.log(keyword());
+  };
+
   return (
     <div class={styles.App}>
       <header class={styles.header}>
-        <img src={logo} class={styles.logo} alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          class={styles.link}
-          href="https://github.com/solidjs/solid"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn Solid
-        </a>
+        <p>Scrape for deals</p>
+
+        <input
+          type="text"
+          onInput={(e) => handleKeywordChange(e)}
+          placeholder="Whatcha looking for?"
+        />
+        <button type="button" onClick={submitKeyword}>
+          Search
+        </button>
       </header>
     </div>
   );
